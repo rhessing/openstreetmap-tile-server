@@ -92,7 +92,7 @@ USER renderer
 
 # Start running
 USER root
-RUN apt-get install -y sudo
+RUN apt-get install -y sudo netcat
 COPY run.sh /
 ENTRYPOINT ["/run.sh"]
 CMD []
