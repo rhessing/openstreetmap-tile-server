@@ -29,6 +29,7 @@ if [ "$#" -ne 1 ]; then
     echo "    PGPORT: defines the DB port, default: 5432"
     echo "    PGUSER: defines the DB username, default: renderer"
     echo "    PGPASS: defines the DB password, by default this variable is not set"
+    echo "    PROXY: defines the proxy to be used for downloading the fallback data file, by default this variable is not set"
     exit 1
 fi
 
@@ -42,6 +43,11 @@ export PGDATABASE = ${PGDATABASE:-gis}
 export PGHOST = ${PGHOST:-127.0.0.1}
 export PGPORT = ${PGPORT:-5432}
 export PGUSER = ${PGUSER:-renderer}
+
+if [ ! -z "${PROXY}" ] ; then
+    export https_proxy = "${PROXY}"
+    export http_proxy = "${PROXY}"
+fi
 
 if [ ! -z "${PGPASS}" ] ; then
     sudo -u postgres echo "${PGHOST}:${PGPORT}:${PGDATABASE}:${PGUSER}:${PGPASS}" > ~/.pgpass
