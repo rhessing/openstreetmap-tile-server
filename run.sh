@@ -33,20 +33,20 @@ if [ "$#" -ne 1 ]; then
     exit 1
 fi
 
-LOCAL = ${LOCAL:-true}
-CREATEDB = ${CREATEDB:-false}
-CREATEUSER = ${CREATEDB:-false}
-CACHESIZE = ${CACHESIZE:-2048}
-THREADS = ${THREADS:-4}
+LOCAL=${LOCAL:-true}
+CREATEDB=${CREATEDB:-false}
+CREATEUSER=${CREATEDB:-false}
+CACHESIZE=${CACHESIZE:-2048}
+THREADS=${THREADS:-4}
 
-export PGDATABASE = ${PGDATABASE:-gis}
-export PGHOST = ${PGHOST:-127.0.0.1}
-export PGPORT = ${PGPORT:-5432}
-export PGUSER = ${PGUSER:-renderer}
+export PGDATABASE=${PGDATABASE:-gis}
+export PGHOST=${PGHOST:-127.0.0.1}
+export PGPORT=${PGPORT:-5432}
+export PGUSER=${PGUSER:-renderer}
 
 if [ ! -z "${PROXY}" ] ; then
-    export https_proxy = "${PROXY}"
-    export http_proxy = "${PROXY}"
+    export https_proxy="${PROXY}"
+    export http_proxy="${PROXY}"
 fi
 
 if [ ! -z "${PGPASS}" ] ; then
