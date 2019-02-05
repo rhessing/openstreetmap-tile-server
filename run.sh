@@ -66,14 +66,14 @@ fi
 # Reconfigure carto by adjusting project.mml settings
 sed -i '/dbname/ s/"gis"/"${PGDATABASE}"/' /home/renderer/src/openstreetmap-carto/project.mml
 if [ "${LOCAL}" = false ] ; then
-    sed -i '/dbname: "${PGDATABASE}"/i \ \ \ \ host: "${PGHOST}"' /home/renderer/src/openstreetmap-carto/project.mml
-    sed -i '/dbname: "${PGDATABASE}"/i \ \ \ \ port: "${PGPORT}"' /home/renderer/src/openstreetmap-carto/project.mml
+    sed -i "/dbname: \"${PGDATABASE}\"/i \ \ \ \ host: \"${PGHOST}\"" /home/renderer/src/openstreetmap-carto/project.mml
+    sed -i "/dbname: \"${PGDATABASE}\"/i \ \ \ \ port: \"${PGPORT}\"" /home/renderer/src/openstreetmap-carto/project.mml
 fi
 
-sed -i '/dbname: "${PGDATABASE}"/i \ \ \ \ user: "${PGUSER}"' /home/renderer/src/openstreetmap-carto/project.mml
+sed -i "/dbname: \"${PGDATABASE}\"/a \ \ \ \ user: \"${PGUSER}\"" /home/renderer/src/openstreetmap-carto/project.mml
 
 if [ ! -z "${PGPASS}" ] ; then
-    sed -i '/dbname: "${PGDATABASE}"/i \ \ \ \ password: "${PGPASS}"' /home/renderer/src/openstreetmap-carto/project.mml
+    sed -i "/dbname: \"${PGDATABASE}\"/a \ \ \ \ password: \"${PGPASS}\"" /home/renderer/src/openstreetmap-carto/project.mml
 fi
 
 carto /home/renderer/src/openstreetmap-carto/project.mml > /home/renderer/src/openstreetmap-carto/mapnik.xml
