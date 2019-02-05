@@ -64,7 +64,7 @@ fi
 
 
 # Reconfigure carto by adjusting project.mml settings
-sed -i '/dbname/ s/"gis"/"${PGDATABASE}"/' /home/renderer/src/openstreetmap-carto/project.mml
+sed -i "/dbname/ s/\"gis\"/\"${PGDATABASE}\"/" /home/renderer/src/openstreetmap-carto/project.mml
 if [ "${LOCAL}" = false ] ; then
     sed -i "/dbname: \"${PGDATABASE}\"/i \ \ \ \ host: \"${PGHOST}\"" /home/renderer/src/openstreetmap-carto/project.mml
     sed -i "/dbname: \"${PGDATABASE}\"/i \ \ \ \ port: \"${PGPORT}\"" /home/renderer/src/openstreetmap-carto/project.mml
