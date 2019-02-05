@@ -1,6 +1,36 @@
 # openstreetmap-tile-server
 
-This container allows you to easily set up an OpenStreetMap PNG tile server given a `.osm.pbf` file. It is based on the [latest Ubuntu 18.04 LTS guide](https://switch2osm.org/manually-building-a-tile-server-18-04-lts/) from [switch2osm.org](https://switch2osm.org/) and therefore uses the default OpenStreetMap style.
+This container allows you to easily set up an OpenStreetMap PNG tile server given a `.osm.pbf` file. It is based on the great work done by [Overv](https://github.com/Overv/openstreetmap-tile-server) and uses the default OpenStreetMap style.
+
+The project from [Overv](https://github.com/Overv/openstreetmap-tile-server) has been forked and adjusted to enable the use of an external PostgreSQL database server.
+
+The following environment variables can be added to allow for an connection to an external PostgreSQL database server:
+
+    CREATEUSER: set this to true if you want the image to create the user, default: false
+                CREATEUSER env option is only available for an external DB, for a local DB this will always be true
+                Note: CREATEUSER is not used for the run command
+
+    CREATEDB: set this to true if you want the image to create the DB, default: false
+              CREATEDB env option is only available for an external DB, for a local DB this will always be true
+              Note: CREATEDB is not used for the run command
+
+    CACHESIZE: defines the cache size used during import. Size in MB, default: 2048
+               Note: CACHESIZE is not used for the run command
+           
+    LOCAL: Import the data into the PGSQL instance within this image, default: true
+           Please note: when LOCAL=false please use --network host command if you want to access a PGSQL instance
+           running natively on the docker host, not required if the PGSQL instance runs inside docker
+ 
+    THREADS: defines number of threads used for importing / tile rendering, default: 4
+    PGDATABASE: defines the name of the DB, default: gis
+    PGHOST: defines the DB host IP, default: 127.0.0.1
+    PGPORT: defines the DB port, default: 5432
+    PGUSER: defines the DB username, default: renderer
+    PGPASS: defines the DB password, by default this variable is not set
+    PROXY: defines the proxy to be used for downloading the fallback data file, by default this variable is not set
+
+
+If no environment variables are added it will work exactly the same as the container from Overv.
 
 ## Setting up the server
 
